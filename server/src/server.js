@@ -1,6 +1,7 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
+const cors = require('cors');
 
 const schema = buildSchema(`
   type Query {
@@ -31,7 +32,7 @@ const root = {
 };
 
 const app = express();
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', cors(), graphqlHTTP({
   schema,
   rootValue: root,
   graphiql: true,
