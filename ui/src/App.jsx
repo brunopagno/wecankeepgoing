@@ -1,6 +1,6 @@
 import React from 'react';
-import Stories from './components/Stories/Stories';
+import StoriesView from './views/StoriesView';
 
 export default () => (
-  <Stories />
+  <StoriesView />
 );
