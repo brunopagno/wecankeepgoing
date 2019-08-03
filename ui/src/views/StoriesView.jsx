@@ -4,17 +4,14 @@ import Stories from '../components/Stories';
 import Input from '../components/Input';
 
 class StoriesView extends React.Component {
-  static async addStory(text) {
-    const response = await StoriesService.addStory(text);
-    console.log({ response });
-  }
-
   constructor(props) {
     super(props);
 
     this.state = {
       stories: [],
     };
+
+    this.addStory = this.addStory.bind(this);
   }
 
   async componentDidMount() {
@@ -24,12 +21,20 @@ class StoriesView extends React.Component {
     });
   }
 
+  async addStory(text) {
+    const { stories } = this.state;
+    const response = await StoriesService.addStory(text);
+    this.setState({
+      stories: [...stories, { id: response.id, text: response.text }],
+    });
+  }
+
   render() {
     const { stories } = this.state;
 
     return (
       <Fragment>
-        <Input onSubmit={StoriesView.addStory} />
+        <Input onSubmit={this.addStory} />
         <Stories stories={stories} />
       </Fragment>
     );

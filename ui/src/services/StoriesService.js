@@ -52,7 +52,7 @@ class StoriesService {
 
       const queryResult = await response.json();
 
-      return queryResult;
+      return queryResult.data.addStory;
     }
     return null;
   }
