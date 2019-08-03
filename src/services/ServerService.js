@@ -1,6 +1,6 @@
 class ServerService {
   constructor() {
-    this.API_URL = process.env.API_URL;
+    this.API_URL = process.env.API_URL || 'graphql';
   }
 
   url() {
