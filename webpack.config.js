@@ -1,5 +1,5 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.jsx',
@@ -28,6 +28,8 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new Dotenv(),
+    new webpack.EnvironmentPlugin({
+      API_URL: 'localhost:4000/graphql',
+    }),
   ],
 };
