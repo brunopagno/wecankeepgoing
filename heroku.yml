@@ -1,3 +1,5 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    API_URL: https://wecankeepgoing-server.herokuapp.com/graphql
