@@ -1,47 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
+const Input = ({ value, buttonText, onSubmit }) => {
+  const [currentValue, setValue] = useState(value);
 
-    const { value } = this.props;
-    this.state = {
-      value,
-    };
+  const onChangeValue = (ev) => {
+    setValue(ev.target.value);
+  };
 
-    this.onChangeValue = this.onChangeValue.bind(this);
-    this.onSubmitValue = this.onSubmitValue.bind(this);
-  }
-
-  onChangeValue(ev) {
-    this.setState({
-      value: ev.target.value,
-    });
-  }
-
-  onSubmitValue(ev) {
+  const onSubmitValue = (ev) => {
     ev.preventDefault();
-    const { value } = this.state;
-    const { onSubmit } = this.props;
-    onSubmit(value);
-    this.setState({
-      value: '',
-    });
-  }
+    onSubmit(currentValue);
+    setValue('');
+  };
 
-  render() {
-    const { value } = this.state;
-    const { buttonText } = this.props;
-
-    return (
-      <form onSubmit={this.onSubmitValue}>
-        <input type="text" onChange={this.onChangeValue} value={value} />
-        <button type="submit">{ buttonText }</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onSubmitValue}>
+      <input type="text" onChange={onChangeValue} value={currentValue} />
+      <button type="submit">{ buttonText }</button>
+    </form>
+  );
+};
 
 Input.propTypes = {
   value: PropTypes.string,

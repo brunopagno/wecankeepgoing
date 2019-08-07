@@ -29,7 +29,7 @@ module.exports = {
       filename: './index.html',
     }),
     new webpack.EnvironmentPlugin({
-      API_URL: 'localhost:4000/graphql',
+      API_URL: 'http://localhost:4000/graphql',
     }),
   ],
 };
